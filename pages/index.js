@@ -1,29 +1,19 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Car, Phone, Mail, Plane } from "lucide-react";
+import { Car, Plane, Phone, Mail } from "lucide-react";
+
+const prices = {
+  Manchester: 60,
+  Liverpool: 55,
+  Leeds: 90,
+  "East Midlands": 120,
+};
 
 export default function Home() {
-  const prices = {
-    Manchester: 60,
-    Liverpool: 55,
-    Leeds: 90,
-    "East Midlands": 120,
-  };
-
+  const [form, setForm] = useState({ name: "", email: "", phone: "", pickup: "", dropoff: "" });
   const [quote, setQuote] = useState(null);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    pickup: "",
-    dropoff: "",
-  });
+  const [message, setMessage] = useState("");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleBooking = async (e) => {
     e.preventDefault();
     const res = await fetch("/api/bookings", {
       method: "POST",
@@ -31,25 +21,20 @@ export default function Home() {
       body: JSON.stringify(form),
     });
     if (res.ok) {
-      alert("Booking confirmed! Check your email and SMS for confirmation.");
+      setMessage("Booking confirmed! Check your email & SMS.");
       setForm({ name: "", email: "", phone: "", pickup: "", dropoff: "" });
       setQuote(null);
     } else {
-      alert("There was an error. Please try again.");
+      setMessage("There was an error. Please try again.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <main className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <section className="bg-blue-600 text-white py-20 px-6 text-center">
+      <section className="bg-blue-600 text-white text-center py-16 px-6">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">SkyLink Transfers</h1>
-        <p className="text-lg md:text-xl mb-6">
-          Reliable airport transfers with instant quotes, email & SMS booking confirmation.
-        </p>
-        <Button className="bg-white text-blue-600 font-semibold rounded-xl shadow-lg">
-          Book Your Ride
-        </Button>
+        <p className="text-lg md:text-2xl">Reliable airport transfers made simple</p>
       </section>
 
       {/* Instant Quote */}
@@ -62,9 +47,7 @@ export default function Home() {
               const pickup = e.target.pickup.value;
               const dest = e.target.destination.value;
               const price = prices[dest];
-              if (price) {
-                setQuote({ pickup, dest, price });
-              }
+              if (price) setQuote({ pickup, dest, price });
             }}
             className="grid gap-4 bg-gray-50 p-6 rounded-2xl shadow-md"
           >
@@ -82,9 +65,9 @@ export default function Home() {
               <option value="Leeds">Leeds</option>
               <option value="East Midlands">East Midlands</option>
             </select>
-            <Button type="submit" className="bg-blue-600 text-white">
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-lg">
               Get Quote
-            </Button>
+            </button>
           </form>
 
           {quote && (
@@ -92,14 +75,14 @@ export default function Home() {
               <p className="text-lg font-semibold">
                 Price to {quote.dest}: <span className="text-blue-700">£{quote.price}</span>
               </p>
-              <Button
+              <button
                 onClick={() =>
                   setForm({ ...form, pickup: quote.pickup, dropoff: quote.dest })
                 }
-                className="mt-4 bg-blue-600 text-white"
+                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg"
               >
                 Proceed to Booking
-              </Button>
+              </button>
             </div>
           )}
         </div>
@@ -107,101 +90,83 @@ export default function Home() {
 
       {/* Booking Form */}
       <section className="bg-gray-100 py-16 px-6">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Book Your Transfer</h2>
-          <form
-            onSubmit={handleSubmit}
-            className="grid gap-4 bg-white p-6 rounded-2xl shadow-md"
-          >
+          <form onSubmit={handleBooking} className="grid gap-4 bg-white p-6 rounded-2xl shadow-md">
             <input
               type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Full Name"
+              placeholder="Name"
               className="border p-3 rounded-lg w-full"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
             />
             <input
               type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Email Address"
+              placeholder="Email"
               className="border p-3 rounded-lg w-full"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
             />
             <input
               type="tel"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="Phone (e.g., +447... )"
-              pattern="^\\+?[0-9\\s-]{7,15}$"
+              placeholder="Phone"
               className="border p-3 rounded-lg w-full"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
               required
             />
             <input
               type="text"
-              name="pickup"
-              value={form.pickup}
-              onChange={handleChange}
               placeholder="Pickup Address"
               className="border p-3 rounded-lg w-full"
+              value={form.pickup}
+              onChange={(e) => setForm({ ...form, pickup: e.target.value })}
               required
             />
             <input
               type="text"
-              name="dropoff"
-              value={form.dropoff}
-              onChange={handleChange}
-              placeholder="Dropoff Location"
+              placeholder="Dropoff Destination"
               className="border p-3 rounded-lg w-full"
+              value={form.dropoff}
+              onChange={(e) => setForm({ ...form, dropoff: e.target.value })}
               required
             />
-            <Button type="submit" className="bg-blue-600 text-white">
+            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-lg">
               Confirm Booking
-            </Button>
+            </button>
           </form>
+          {message && <p className="mt-4 text-center">{message}</p>}
         </div>
       </section>
 
       {/* Services */}
-      <section className="py-16 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">Why Choose Us?</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="bg-white rounded-2xl p-6 shadow-md text-center">
-            <Car className="mx-auto mb-4 text-blue-600" size={40} />
-            <h3 className="font-bold text-lg mb-2">Modern Vehicles</h3>
-            <p>Comfortable, reliable, and well-maintained cars for your journey.</p>
+      <section className="bg-white py-16 px-6">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <Car className="mx-auto h-10 w-10 text-blue-600 mb-2" />
+            <h3 className="font-semibold">Door-to-Door Service</h3>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-md text-center">
-            <Plane className="mx-auto mb-4 text-blue-600" size={40} />
-            <h3 className="font-bold text-lg mb-2">Flight Tracking</h3>
-            <p>We monitor your flight to ensure on-time pickups every time.</p>
+          <div>
+            <Plane className="mx-auto h-10 w-10 text-blue-600 mb-2" />
+            <h3 className="font-semibold">Flight Tracking</h3>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-md text-center">
-            <Mail className="mx-auto mb-4 text-blue-600" size={40} />
-            <h3 className="font-bold text-lg mb-2">Easy Payments</h3>
-            <p>We accept secure card payments for your convenience.</p>
+          <div>
+            <Phone className="mx-auto h-10 w-10 text-blue-600 mb-2" />
+            <h3 className="font-semibold">24/7 Support</h3>
+          </div>
+          <div>
+            <Mail className="mx-auto h-10 w-10 text-blue-600 mb-2" />
+            <h3 className="font-semibold">Card Payments Accepted</h3>
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="bg-blue-600 text-white py-16 px-6 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">Get in Touch</h2>
-        <p className="mb-6">Have questions? Contact us today.</p>
-        <div className="flex flex-col md:flex-row justify-center gap-6">
-          <p className="flex items-center gap-2 justify-center">
-            <Phone size={20} /> +44 1234 567890
-          </p>
-          <p className="flex items-center gap-2 justify-center">
-            <Mail size={20} /> info@skylinktransfers.com
-          </p>
-        </div>
-      </section>
-    </div>
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white text-center py-6">
+        <p>© {new Date().getFullYear()} SkyLink Transfers. All rights reserved.</p>
+      </footer>
+    </main>
   );
 }
-
