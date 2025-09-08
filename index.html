@@ -31,6 +31,10 @@
     header .hero-text {
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
     header h1 {
       font-size: 3rem;
@@ -38,6 +42,32 @@
     }
     header p {
       font-size: 1.25rem;
+      margin-top: 0;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .call-button {
+      background-color: #2563eb;
+      color: white;
+    }
+    .whatsapp-button {
+      background-color: #25D366;
+      color: white;
+    }
+    .hero-button:hover {
+      transform: scale(1.05);
     }
     section {
       max-width: 1100px;
@@ -107,6 +137,10 @@
     <div class="hero-text">
       <h1>Skylink Airport Transfers</h1>
       <p>Reliable transfers from Bolton, Wigan and surrounding areas</p>
+      <div class="hero-buttons">
+        <a href="tel:07746937197" class="hero-button call-button">Call Now</a>
+        <a href="https://wa.me/447746937197" class="hero-button whatsapp-button" target="_blank">WhatsApp Us</a>
+      </div>
     </div>
   </header>
 
@@ -133,8 +167,8 @@
 
   <section class="contact">
     <h2>Book Your Transfer Today</h2>
-    <p>Call us on <strong>07746 937917</strong> to arrange your airport transfer.</p>
-    <a href="https://www.facebook.com/profile.php?id=61580200365346" target="_blank" class="contact-link">
+    <p>Call us on <strong>07746 937197</strong> to arrange your airport transfer.</p>
+    <a href="https://www.facebook.com/SkylinkAirportTransfers" target="_blank" class="contact-link">
       Find us on Facebook
     </a>
   </section>
