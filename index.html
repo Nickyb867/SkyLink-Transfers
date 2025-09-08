@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skylink Airport Transfers</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background: #f9f9f9;
+      line-height: 1.6;
+    }
+    header {
+      position: relative;
+      height: 80vh;
+      background: url('https://images.pexels.com/photos/1443894/pexels-photo-1443894.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    header .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+    header img {
+      max-width: 180px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 3rem 1rem;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #2563eb;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    .contact {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      border-radius: 12px;
+    }
+    .contact h2 {
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #111;
+      color: white;
+    }
+    footer img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Hero Section -->
+  <header>
+    <div class="hero-text">
+      <img src="logo.png" alt="Skylink Airport Transfers Logo">
+      <h1>Skylink Airport Transfers</h1>
+      <p>Reliable transfers from Bolton, Wigan and surrounding areas</p>
+    </div>
+  </header>
+
+  <!-- Why Choose Us Section -->
+  <section>
+    <h2>Why Choose Us?</h2>
+    <div class="features">
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1086/1086741.png" alt="Flight tracking">
+        <h3>Flight Tracking</h3>
+        <p>Your driver monitors your flight to ensure on-time pickups and drop-offs.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Payment machine">
+        <h3>Card Payments</h3>
+        <p>Pay easily in-vehicle using secure card payment machines.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Comfortable vehicles">
+        <h3>Comfortable Vehicles</h3>
+        <p>Travel in modern, spacious minibuses designed for your comfort.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2>Book Your Transfer Today</h2>
+    <p>Call us on <strong>07746 937917</strong> to arrange your airport transfer.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <img src="logo.png" alt="Skylink Airport Transfers Logo">
+    <p>&copy; 2025 Skylink Airport Transfers. All rights reserved.</p>
+  </footer>
+</body>
+</html>
